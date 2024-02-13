@@ -1,7 +1,7 @@
 title = "Verus blog"
 
 # The URL the site will be built for
-base_url = "http://verus-lang.github.io/blog"
+base_url = "https://verus-lang.github.io/blog"
 
 # Whether to automatically compile all Sass files in the sass directory
 compile_sass = true
