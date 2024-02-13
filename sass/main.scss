@@ -125,14 +125,15 @@
     }
 
     .container {
-      margin-left: 40px;
-      margin-right: 40px;
+      margin-left: 20px;
+      margin-right: 20px;
     }
 
     .left-float {
       display: flex;
       flex-direction: row;
       width: auto;
+      margin-left: 0px;
     }
 
     .left-header {
@@ -143,7 +144,7 @@
 
 @media (min-width: 641px) and (max-width: 72em) {
   .left-announcements {
-    margin-left: 40px;
+    margin-left: 20px;
   }
 }
 
