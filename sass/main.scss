@@ -139,9 +139,16 @@
       width: 260px;
       flex-shrink: 0;
     }
-
-    .left-announcements {
-      margin-left: 40px;
-    }
 }
 
+@media (min-width: 641px) and (max-width: 72em) {
+  .left-announcements {
+    margin-left: 40px;
+  }
+}
+
+@media (max-width: 640px) {
+  .left-announcements {
+    display: none;
+  }
+}
