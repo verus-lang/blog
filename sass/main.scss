@@ -12,18 +12,29 @@
   font-size: 80%;
 }
 
-@media (max-width: 840px) {
-    .site-header {
-        text-align: inherit;
-    }
+.flex-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.container {
+  max-width: 42em;
+  margin: inherit;
+  margin-right: 40px;
 }
 
 .left-float {
-  float: left;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
   margin-left: 20px;
   margin-right: 20px;
   width: 260px;
   padding: 0px 20px 20px 20px;
+}
+
+.left-header {
   font-size: 70%;
 }
 
@@ -43,3 +54,94 @@
     color: grey;
     margin-top: 1em;
 }
+
+.left-announcements > h2 {
+  margin-bottom: 2px;
+}
+
+.left-announcement-item {
+  margin-bottom: 8px;
+}
+
+.left-announcement-date {
+  font-size: 80%;
+  display: block;
+  margin-bottom: 0px;
+}
+
+@media (max-width: 840px) {
+    .main-wrapper {
+        margin: 0;
+        max-width: none;
+        overflow-x: hidden;
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+
+    .flex-container {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+        max-width: inherit;
+        margin: inherit;
+        margin-right: inherit;
+    }
+
+    .pagination-item {
+        padding: 0.5em 0.5em;
+        font-size: 14px;
+    }
+
+    header {
+        display: inherit;
+    }
+
+    .site-header {
+        text-align: inherit;
+    }
+
+    header nav {
+        margin-top: inherit;
+        max-width: inherit;
+        text-align: inherit;
+        padding: inherit;
+    }
+
+    header nav a:first-of-type {
+        margin-left: inherit;
+    }
+
+    header nav a {
+        margin-left: inherit;
+    }
+}
+
+@media (max-width: 72em) {
+    .flex-container {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      margin-left: 40px;
+      margin-right: 40px;
+    }
+
+    .left-float {
+      display: flex;
+      flex-direction: row;
+      width: auto;
+    }
+
+    .left-header {
+      width: 260px;
+      flex-shrink: 0;
+    }
+
+    .left-announcements {
+      margin-left: 40px;
+    }
+}
+
