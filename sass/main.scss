@@ -1,0 +1,45 @@
+@import "../themes/anpu/sass/main.scss"
+
+.container {
+  margin-top:20px;
+}
+
+.site-header {
+  font-size: 2em;
+}
+
+.powered-by-footer {
+  font-size: 80%;
+}
+
+@media (max-width: 840px) {
+    .site-header {
+        text-align: inherit;
+    }
+}
+
+.left-float {
+  float: left;
+  margin-left: 20px;
+  margin-right: 20px;
+  width: 260px;
+  padding: 0px 20px 20px 20px;
+  font-size: 70%;
+}
+
+.article-authors {
+    display: inline;
+    list-style-type: none;
+    padding: 0;
+}
+
+.article-authors li {
+    display: inline;
+    margin-right: 1em;
+}
+
+.article-info {
+    font-size: 0.9em;
+    color: grey;
+    margin-top: 1em;
+}
