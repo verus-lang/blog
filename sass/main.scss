@@ -69,6 +69,36 @@
   margin-bottom: 0px;
 }
 
+@media (max-width: 72em) {
+    .flex-container {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      margin-left: 40px;
+      margin-right: 40px;
+    }
+
+    .left-float {
+      display: flex;
+      flex-direction: row;
+      width: auto;
+      margin-left: 20px;
+    }
+
+    .left-header {
+      width: 260px;
+      flex-shrink: 0;
+    }
+
+    .left-announcements {
+      margin-left: 20px;
+      border-left: 1px solid grey;
+      padding-left: 20px;
+    }
+}
+
 @media (max-width: 840px) {
     .main-wrapper {
         margin: 0;
@@ -85,8 +115,12 @@
 
     .container {
         max-width: inherit;
-        margin: inherit;
-        margin-right: inherit;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    .left-float {
+      margin-left: 0px;
     }
 
     .pagination-item {
@@ -118,35 +152,6 @@
     }
 }
 
-@media (max-width: 72em) {
-    .flex-container {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .container {
-      margin-left: 20px;
-      margin-right: 20px;
-    }
-
-    .left-float {
-      display: flex;
-      flex-direction: row;
-      width: auto;
-      margin-left: 0px;
-    }
-
-    .left-header {
-      width: 260px;
-      flex-shrink: 0;
-    }
-}
-
-@media (min-width: 641px) and (max-width: 72em) {
-  .left-announcements {
-    margin-left: 20px;
-  }
-}
 
 @media (max-width: 640px) {
   .left-announcements {
