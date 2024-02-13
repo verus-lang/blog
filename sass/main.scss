@@ -153,3 +153,39 @@
     display: none;
   }
 }
+
+pre {
+  background-color: inherit;
+  padding: 1rem;
+  overflow: auto;
+}
+pre[data-linenos] {
+  padding: 1rem 0;
+}
+pre table td {
+  padding: 0;
+  border-style: hidden;
+}
+pre table td:nth-of-type(1) {
+  text-align: center;
+  user-select: none;
+}
+pre mark {
+  display: block;
+  background-color: rgba(254, 252, 232, 0.9);
+}
+pre table {
+  width: 100%;
+  border-collapse: collapse;
+}
+code,
+pre,
+kbd {
+    font-family: monospace;
+    font-size: 0.90em;
+    line-height: 120%;
+}
+.ansi-html {
+    color: #ffffff;
+    background-color: #2b2c2f;
+}
