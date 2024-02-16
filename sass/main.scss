@@ -55,18 +55,26 @@
     margin-top: 1em;
 }
 
+.left-announcements {
+  overflow: scroll;
+}
+
 .left-announcements > h2 {
   margin-bottom: 2px;
 }
 
 .left-announcement-item {
-  margin-bottom: 8px;
+  margin-bottom: 30px;
 }
 
 .left-announcement-date {
   font-size: 80%;
   display: block;
   margin-bottom: 0px;
+}
+
+.left-announcement-text {
+  font-size: 80%;
 }
 
 @media (max-width: 72em) {
@@ -83,7 +91,7 @@
     .left-float {
       display: flex;
       flex-direction: row;
-      width: auto;
+      width: 80%;
       margin-left: 20px;
     }
 
@@ -96,6 +104,8 @@
       margin-left: 20px;
       border-left: 1px solid grey;
       padding-left: 20px;
+      overflow: scroll;
+      max-height: 240px;
     }
 }
 

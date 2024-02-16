@@ -41,7 +41,7 @@
         {% set blog_section = get_section(path="announcements/_index.md") %}
         {% for page in blog_section.pages %}
         <div class="left-announcement-item">
-        <span class="left-announcement-date">{{page.date}}</span> <a href="{{ page.permalink }}">{{ page.title }}</a>
+          <span class="left-announcement-date">{{page.date}}<br/>{{page.extra.author}}</span> <span class="left-announcement-text">{{ page.content | safe }}</span>
         </div>
         {% endfor %}
       </div>
