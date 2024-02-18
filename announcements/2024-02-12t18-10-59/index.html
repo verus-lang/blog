@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+
+    <title>Announcement 2024-02-12</title>
+    <meta name="description" content="">
+
+    <link rel="stylesheet" href="https://verus-lang.github.io/blog/main.css">
+
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="https://verus-lang.github.io/blog/atom.xml">
+    
+
+    
+    
+</head>
+<body>
+
+  <div class="watermark">
+    <div class="watermark-text">DRAFT</div>
+  </div>
+
+  <div class="flex-container">
+  <!--<a class="skip-main" href="#main">Skip to content</a>-->
+    <div class="left-float">
+      <div class="left-header">
+      <h1 class="site-header">
+          <a href="https:&#x2F;&#x2F;verus-lang.github.io&#x2F;blog">Verus blog</a>
+      </h1>
+      <p style="text-align: justify;">Verus is a tool for verifying the correctness of code written in Rust. Developers write specifications of what their code should do, and Verus statically checks that the executable Rust code will always satisfy the specifications for all possible executions of the code.</p>
+      <p style="font-weight: bold; font-size: 100%">Verus is open-source at <a href="https://github.com/verus-lang/verus">github.com/verus-lang/verus</a></p>
+      </div>
+      
+    </div>
+    <div class="container">
+        <header> 
+            <!--<nav>
+                
+                
+                
+                <a  href="https:&#x2F;&#x2F;github.com&#x2F;verus-lang&#x2F;verus">Verus</a>
+                
+                
+            </nav>-->
+        </header>
+        <main id="main" tabindex="-1">
+            
+
+<article class="post">
+    <header>
+        <h1>Announcement 2024-02-12</h1>
+    </header>
+    <div class="content">
+        <p>Hi all! I have just merged <a href="https://github.com/verus-lang/verus/pull/978">PR 978</a>. Next time you pull <code>main</code> you will need to obtain z3 4.12.5 (using <code>./tools/get-z3.(sh|ps1)</code>. Vargo will check that the current version of z3 is the correct one, and let you know otherwise (you can override this check with <code>--no-solver-version-check</code> but note that current Verus will only successfully build with 4.12.5 (as we are using a new z3 option that was released in this version). As a reminder: updating z3 may cause existing proofs to break (due to changes in z3’s heuristics). Based on preliminary testing we expect limited breakage but be aware that when you pick up the merge commit you may need to tweak the proofs for certain functions. Let us know if you experience extensive breakage or if you encounter other issues.</p>
+
+    </div>
+
+    
+    <div class="article-info">
+        
+        <div class="article-date">12 February 2024</div>
+        
+        <div class="article-taxonomies">
+            
+            
+            
+        </div>
+    </div>
+
+</article>
+
+
+        </main>
+        <footer>
+            <p class="powered-by-footer">
+                Powered by <a target="_blank" href="https://getzola.org/">Zola</a>, Theme <a target="_blank" href="https://github.com/zbrox/anpu-zola-theme">Anpu</a> (customized).
+            </p>
+            <p>
+                
+                
+            </p>
+        </footer>
+    </div>
+  </div>
+
+  <div class="dark-mode-buttons">
+  <button class="dark-mode-button" id="dark-mode-on">
+    <img
+      src="https://verus-lang.github.io/blog/dark_mode.svg"
+      width="24"
+      height="24"
+      alt="Dark mode"
+      aria-label="dark mode toggle"
+      title="Dark mode"
+    />
+  </button>
+  <button class="dark-mode-button" id="dark-mode-off">
+    <img
+      src="https://verus-lang.github.io/blog/light_mode.svg "
+      width="24"
+      height="24"
+      alt="Light mode"
+      aria-label="light mode toggle"
+      title="Light mode"
+      style="filter: invert(1);"
+    />
+  </button>
+</div>
+<script>
+  const cls = document.body.classList;
+  const getSessionTheme = sessionStorage.getItem("theme");
+  if (getSessionTheme === "dark") {
+    cls.toggle("dark-mode", true);
+  } else if (getSessionTheme === "light") {
+    cls.toggle("dark-mode", false);
+  } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+    cls.toggle("dark-mode", true);
+  }
+  document
+    .getElementById("dark-mode-on")
+    .addEventListener("click", function (e) {
+      cls.toggle("dark-mode", true);
+      sessionStorage.setItem("theme", "dark");
+    });
+  document
+    .getElementById("dark-mode-off")
+    .addEventListener("click", function (e) {
+      cls.toggle("dark-mode", false);
+      sessionStorage.setItem("theme", "light");
+    });
+</script>
+<noscript>
+  <style>
+    .dark-mode-buttons {
+      display: none;
+    }
+  </style>
+</noscript>
+
+    
+</body>
+</html>

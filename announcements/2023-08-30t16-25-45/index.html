@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+
+    <title>Announcement 2023-08-30</title>
+    <meta name="description" content="">
+
+    <link rel="stylesheet" href="https://verus-lang.github.io/blog/main.css">
+
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="https://verus-lang.github.io/blog/atom.xml">
+    
+
+    
+    
+</head>
+<body>
+
+  <div class="watermark">
+    <div class="watermark-text">DRAFT</div>
+  </div>
+
+  <div class="flex-container">
+  <!--<a class="skip-main" href="#main">Skip to content</a>-->
+    <div class="left-float">
+      <div class="left-header">
+      <h1 class="site-header">
+          <a href="https:&#x2F;&#x2F;verus-lang.github.io&#x2F;blog">Verus blog</a>
+      </h1>
+      <p style="text-align: justify;">Verus is a tool for verifying the correctness of code written in Rust. Developers write specifications of what their code should do, and Verus statically checks that the executable Rust code will always satisfy the specifications for all possible executions of the code.</p>
+      <p style="font-weight: bold; font-size: 100%">Verus is open-source at <a href="https://github.com/verus-lang/verus">github.com/verus-lang/verus</a></p>
+      </div>
+      
+    </div>
+    <div class="container">
+        <header> 
+            <!--<nav>
+                
+                
+                
+                <a  href="https:&#x2F;&#x2F;github.com&#x2F;verus-lang&#x2F;verus">Verus</a>
+                
+                
+            </nav>-->
+        </header>
+        <main id="main" tabindex="-1">
+            
+
+<article class="post">
+    <header>
+        <h1>Announcement 2023-08-30</h1>
+    </header>
+    <div class="content">
+        <p>The pull request <a href="https://github.com/verus-lang/verus/pull/741">https://github.com/verus-lang/verus/pull/741</a> has just been merged. This changes the mechanism for <code>reveal</code> so that type arguments are not required anymore (see the PR for details). This is a breaking change, because, in an impl for type <code>A</code>, <code>Self::</code> is not supported anymore in the argument to reveal/reveal_with_fuel/hide; you can replace it with <code>A::</code> in an <code>impl A</code> block, and with <code>&lt;A as Tr&gt;::</code> in an <code>impl Tr for A</code> block.</p>
+
+    </div>
+
+    
+    <div class="article-info">
+        
+        <div class="article-date">30 August 2023</div>
+        
+        <div class="article-taxonomies">
+            
+            
+            
+        </div>
+    </div>
+
+</article>
+
+
+        </main>
+        <footer>
+            <p class="powered-by-footer">
+                Powered by <a target="_blank" href="https://getzola.org/">Zola</a>, Theme <a target="_blank" href="https://github.com/zbrox/anpu-zola-theme">Anpu</a> (customized).
+            </p>
+            <p>
+                
+                
+            </p>
+        </footer>
+    </div>
+  </div>
+
+  <div class="dark-mode-buttons">
+  <button class="dark-mode-button" id="dark-mode-on">
+    <img
+      src="https://verus-lang.github.io/blog/dark_mode.svg"
+      width="24"
+      height="24"
+      alt="Dark mode"
+      aria-label="dark mode toggle"
+      title="Dark mode"
+    />
+  </button>
+  <button class="dark-mode-button" id="dark-mode-off">
+    <img
+      src="https://verus-lang.github.io/blog/light_mode.svg "
+      width="24"
+      height="24"
+      alt="Light mode"
+      aria-label="light mode toggle"
+      title="Light mode"
+      style="filter: invert(1);"
+    />
+  </button>
+</div>
+<script>
+  const cls = document.body.classList;
+  const getSessionTheme = sessionStorage.getItem("theme");
+  if (getSessionTheme === "dark") {
+    cls.toggle("dark-mode", true);
+  } else if (getSessionTheme === "light") {
+    cls.toggle("dark-mode", false);
+  } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+    cls.toggle("dark-mode", true);
+  }
+  document
+    .getElementById("dark-mode-on")
+    .addEventListener("click", function (e) {
+      cls.toggle("dark-mode", true);
+      sessionStorage.setItem("theme", "dark");
+    });
+  document
+    .getElementById("dark-mode-off")
+    .addEventListener("click", function (e) {
+      cls.toggle("dark-mode", false);
+      sessionStorage.setItem("theme", "light");
+    });
+</script>
+<noscript>
+  <style>
+    .dark-mode-buttons {
+      display: none;
+    }
+  </style>
+</noscript>
+
+    
+</body>
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+
+    <title>A Verus overview</title>
+    <meta name="description" content="">
+
+    <link rel="stylesheet" href="https://verus-lang.github.io/blog/main.css">
+
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="https://verus-lang.github.io/blog/atom.xml">
+    
+
+    
+    
+</head>
+<body>
+
+  <div class="watermark">
+    <div class="watermark-text">DRAFT</div>
+  </div>
+
+  <div class="flex-container">
+  <!--<a class="skip-main" href="#main">Skip to content</a>-->
+    <div class="left-float">
+      <div class="left-header">
+      <h1 class="site-header">
+          <a href="https:&#x2F;&#x2F;verus-lang.github.io&#x2F;blog">Verus blog</a>
+      </h1>
+      <p style="text-align: justify;">Verus is a tool for verifying the correctness of code written in Rust. Developers write specifications of what their code should do, and Verus statically checks that the executable Rust code will always satisfy the specifications for all possible executions of the code.</p>
+      <p style="font-weight: bold; font-size: 100%">Verus is open-source at <a href="https://github.com/verus-lang/verus">github.com/verus-lang/verus</a></p>
+      </div>
+      
+    </div>
+    <div class="container">
+        <header> 
+            <!--<nav>
+                
+                
+                
+                <a  href="https:&#x2F;&#x2F;github.com&#x2F;verus-lang&#x2F;verus">Verus</a>
+                
+                
+            </nav>-->
+        </header>
+        <main id="main" tabindex="-1">
+            
+
+<article class="post">
+    <header>
+        <h1>A Verus overview</h1>
+    </header>
+    <div class="content">
+        <p>Verus is a tool for verifying the correctness of code written in Rust.
+The main goal is to verify full functional correctness of low-level systems code,
+building on ideas from existing verification frameworks like
+<a href="https://github.com/dafny-lang/dafny">Dafny</a>,
+<a href="https://github.com/boogie-org/boogie">Boogie</a>,
+<a href="https://github.com/FStarLang/FStar">F*</a>,
+<a href="https://www.microsoft.com/en-us/research/project/vcc-a-verifier-for-concurrent-c/">VCC</a>,
+<a href="https://github.com/viperproject/prusti-dev">Prusti</a>,
+<a href="https://github.com/xldenis/creusot">Creusot</a>,
+<a href="https://github.com/AeneasVerif/aeneas">Aeneas</a>,
+<a href="https://github.com/NICTA/cogent">Cogent</a>,
+<a href="https://coq.inria.fr/">Coq</a>,
+and
+<a href="https://isabelle.in.tum.de/overview.html">Isabelle/HOL</a>.
+Verification is static: Verus adds no run-time checks,
+but instead uses computer-aided theorem proving to statically verify
+that executable Rust code will always satisfy some user-provided specifications
+for all possible executions of the code.</p>
+<span id="continue-reading"></span>
+<p>In more detail, Verus aims to:</p>
+<ul>
+<li>provide a pure mathematical language for expressing specifications
+(like Dafny, Creusot, F*, Coq, Isabelle/HOL)</li>
+<li>provide a mathematical language for expressing proofs
+(like Dafny, F*, Coq, Isabelle/HOL)
+based exclusively on classical logic (like Dafny)</li>
+<li>provide a low-level, imperative language for expressing executable code (like VCC),
+based on Rust (like Prusti, Creusot, and Aeneas)</li>
+<li>generate small, simple verification conditions that an SMT solver
+like <a href="https://microsoft.github.io/z3guide/docs/logic/intro">Z3</a> can solve efficiently,
+based on the following principles:
+<ul>
+<li>keep the mathematical specification language close to
+the SMT solver's mathematical language (like Boogie)</li>
+<li>use lightweight linear type checking, rather than SMT solving,
+to reason about memory and aliasing
+(like Cogent, Creusot, Aeneas, and <a href="https://github.com/secure-foundations/dafny/tree/betr/docs/Linear">linear Dafny</a>)</li>
+</ul>
+</li>
+</ul>
+<p>We believe that Rust is a good language for achieving these goals.
+Rust combines low-level data manipulation, including manual memory management,
+with an advanced, high-level, safe type system.
+The type system includes features commonly found in higher-level verification languages,
+including algebraic datatypes (with pattern matching), type classes, and first-class functions.
+This makes it easy to express specifications and proofs in a natural way.
+More importantly, Rust's type system includes sophisticated support for linear types and borrowing,
+which takes care of much of the reasoning about memory and aliasing.
+As a result, the remaining reasoning can ignore most memory and aliasing issues,
+and treat the Rust code as if it were code written in a purely functional language,
+which makes verification easier.</p>
+<h1 id="this-guide">This guide</h1>
+<p>This guide assumes that you're already somewhat familiar with the basics of Rust programming.
+(If you're not, we recommend spending a couple hours on the <a href="https://www.rust-lang.org/learn">Learn Rust</a> page.)
+Familiarity with Rust is useful for Verus,
+because Verus builds on Rust's syntax and Rust's type system to express specifications, proofs, and executable code.
+In fact, there is no separate language for specifications and proofs;
+instead, specifications and proofs are written in Rust syntax and type-checked with Rust's type checker.
+So if you already know Rust, you'll have an easier time getting started with Verus.</p>
+<p>Nevertheless, verifying the correctness of Rust code requires concepts and techniques
+beyond just writing ordinary executable Rust code.
+For example, Verus extends Rust's syntax (via macros) with new concepts for
+writing specifications and proofs, such as <code>forall</code>, <code>exists</code>, <code>requires</code>, and <code>ensures</code>,
+as well as introducing new types, like the mathematical integer types <code>int</code> and <code>nat</code>.
+It can be challenging to prove that a Rust function satisfies its postconditions (its <code>ensures</code> clauses)
+or that a call to a function satisfies the function's preconditions (its <code>requires</code> clauses).
+Therefore, this guide's tutorial will walk you through the various concepts and techniques,
+starting with relatively simple concepts (basic proofs about integers),
+moving on to more moderately difficult challenges (inductive proofs about data structures),
+and then on to more advanced topics such as proofs about arrays using <code>forall</code> and <code>exists</code>
+and proofs about concurrent code.</p>
+<p>All of these proofs are aided by an automated theorem prover
+(specifically, <a href="https://microsoft.github.io/z3guide/docs/logic/intro">Z3</a>,
+a satisfiability-modulo-theories solver, or &quot;SMT solver&quot; for short).
+The SMT solver will often be able to prove simple properties,
+such as basic properties about booleans or integer arithmetic,
+with no additional help from the programmer.
+However, more complex proofs often require effort from both the programmer and the SMT solver.
+Therefore, this guide will also help you understand the strengths and limitations of SMT solving,
+and give advice on how to fill in the parts of proofs that SMT solvers cannot handle automatically.
+(For example, SMT solvers usually cannot automatically perform proofs by induction,
+but you can write a proof by induction simply by writing a recursive Rust function whose <code>ensures</code>
+clause expresses the induction hypothesis.)</p>
+
+    </div>
+
+    
+    <div class="article-info">
+        
+        <div class="article-date">13 February 2024</div>
+        
+        <div class="article-taxonomies">
+            
+                Written by
+                <ul class="article-authors">
+                    
+                    <li><a href="https://verus-lang.github.io/blog/authors/chris-hawblitzel/">Chris Hawblitzel</a></li>
+                    
+                    <li><a href="https://verus-lang.github.io/blog/authors/the-verus-team/">The Verus Team</a></li>
+                    
+                </ul>
+            
+            
+            
+        </div>
+    </div>
+
+</article>
+
+
+        </main>
+        <footer>
+            <p class="powered-by-footer">
+                Powered by <a target="_blank" href="https://getzola.org/">Zola</a>, Theme <a target="_blank" href="https://github.com/zbrox/anpu-zola-theme">Anpu</a> (customized).
+            </p>
+            <p>
+                
+                
+            </p>
+        </footer>
+    </div>
+  </div>
+
+  <div class="dark-mode-buttons">
+  <button class="dark-mode-button" id="dark-mode-on">
+    <img
+      src="https://verus-lang.github.io/blog/dark_mode.svg"
+      width="24"
+      height="24"
+      alt="Dark mode"
+      aria-label="dark mode toggle"
+      title="Dark mode"
+    />
+  </button>
+  <button class="dark-mode-button" id="dark-mode-off">
+    <img
+      src="https://verus-lang.github.io/blog/light_mode.svg "
+      width="24"
+      height="24"
+      alt="Light mode"
+      aria-label="light mode toggle"
+      title="Light mode"
+      style="filter: invert(1);"
+    />
+  </button>
+</div>
+<script>
+  const cls = document.body.classList;
+  const getSessionTheme = sessionStorage.getItem("theme");
+  if (getSessionTheme === "dark") {
+    cls.toggle("dark-mode", true);
+  } else if (getSessionTheme === "light") {
+    cls.toggle("dark-mode", false);
+  } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+    cls.toggle("dark-mode", true);
+  }
+  document
+    .getElementById("dark-mode-on")
+    .addEventListener("click", function (e) {
+      cls.toggle("dark-mode", true);
+      sessionStorage.setItem("theme", "dark");
+    });
+  document
+    .getElementById("dark-mode-off")
+    .addEventListener("click", function (e) {
+      cls.toggle("dark-mode", false);
+      sessionStorage.setItem("theme", "light");
+    });
+</script>
+<noscript>
+  <style>
+    .dark-mode-buttons {
+      display: none;
+    }
+  </style>
+</noscript>
+
+    
+</body>
+</html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+
+    <title>Verus blog</title>
+    <meta name="description" content="">
+
+    <link rel="stylesheet" href="https://verus-lang.github.io/blog/main.css">
+
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="https://verus-lang.github.io/blog/atom.xml">
+    
+
+    
+    
+</head>
+<body>
+
+  <div class="watermark">
+    <div class="watermark-text">DRAFT</div>
+  </div>
+
+  <div class="flex-container">
+  <!--<a class="skip-main" href="#main">Skip to content</a>-->
+    <div class="left-float">
+      <div class="left-header">
+      <h1 class="site-header">
+          <a href="https:&#x2F;&#x2F;verus-lang.github.io&#x2F;blog">Verus blog</a>
+      </h1>
+      <p style="text-align: justify;">Verus is a tool for verifying the correctness of code written in Rust. Developers write specifications of what their code should do, and Verus statically checks that the executable Rust code will always satisfy the specifications for all possible executions of the code.</p>
+      <p style="font-weight: bold; font-size: 100%">Verus is open-source at <a href="https://github.com/verus-lang/verus">github.com/verus-lang/verus</a></p>
+      </div>
+      
+      <div class="left-announcements">
+        <h2>Verus Announcements</h2>
+        <!-- TODO turn this into an UL list -->
+        
+        
+        <div class="left-announcement-item">
+          <span class="left-announcement-date">2024-02-13<br/>Travis Hance</span> <span class="left-announcement-text"><p>Hi folks, we recently renamed <code>FnSpec</code> to <code>spec_fn</code>. FnSpec was originally named following the convention of FnOnce, etc., but since it's a type rather than a trait, we decided to make it look more like <code>fn</code> instead. Hence, <code>spec_fn</code>.</p>
+<p>FnSpec should keep working for the time being, except for the deprecation warnings, but will be removed at some point.</p>
+</span>
+        </div>
+        
+        <div class="left-announcement-item">
+          <span class="left-announcement-date">2024-02-13<br/>Jay Lorch</span> <span class="left-announcement-text"><p>Thanks to Alex Bai and others, Verus now has a standard library for arithmetic, based on Dafny's. You can use it by importing from <code>vstd::arithmetic</code>, e.g., with</p>
+<div class="codehilite"><pre><span></span><code>use vstd::arithmetic::div_mod::{lemma_fundamental_div_mod, lemma_mod_bound};
+</code></pre></div>
+<p>Documentation is at <a href="https://verus-lang.github.io/verus/verusdoc/vstd/arithmetic/index.html">this link</a>.</p>
+</span>
+        </div>
+        
+        <div class="left-announcement-item">
+          <span class="left-announcement-date">2024-02-12<br/>Andrea Lattuada</span> <span class="left-announcement-text"><p>Hi all! I have just merged <a href="https://github.com/verus-lang/verus/pull/978">PR 978</a>. Next time you pull <code>main</code> you will need to obtain z3 4.12.5 (using <code>./tools/get-z3.(sh|ps1)</code>. Vargo will check that the current version of z3 is the correct one, and let you know otherwise (you can override this check with <code>--no-solver-version-check</code> but note that current Verus will only successfully build with 4.12.5 (as we are using a new z3 option that was released in this version). As a reminder: updating z3 may cause existing proofs to break (due to changes in z3’s heuristics). Based on preliminary testing we expect limited breakage but be aware that when you pick up the merge commit you may need to tweak the proofs for certain functions. Let us know if you experience extensive breakage or if you encounter other issues.</p>
+</span>
+        </div>
+        
+        <div class="left-announcement-item">
+          <span class="left-announcement-date">2024-02-09<br/>Andrea Lattuada</span> <span class="left-announcement-text"><p>Hi folks! A heads up that I am planning to merge <a href="https://github.com/verus-lang/verus/pull/978">PR 978</a> on Monday morning UTC. This will upgrade z3 to the latest release (4.12.5); this may cause existing proofs to break (due to changes in z3’s heuristics). Based on preliminary testing we expect limited breakage but be aware that when you pick up the merge commit you may need to tweak the proofs for certain functions. I will post another announcement when I merge the change.</p>
+</span>
+        </div>
+        
+        <div class="left-announcement-item">
+          <span class="left-announcement-date">2024-01-31<br/>Travis Hance</span> <span class="left-announcement-text"><p>Hello, you can now pass named functions directly as values (exec functions only). For example:</p>
+<div class="codehilite"><pre><span></span><code>fn a&lt;F: Fn(u8) -&gt; bool&gt;(f: F) { ... }
+<p>fn b(value: u8) -&gt; bool { ... }</p>
+<p>fn main() {
+// This now works:
+a(b);</p>
+<p>// Previously you would have had to create a closure:
+a(|x: u8| b(x));
+}
+</code></pre></div></p>
+<p>As with closures, you can use <code>b.requires(args)</code> and <code>b.ensures(args, output)</code> to access the precondition and postcondition. You can also use <code>call_requires(b, args)</code> or <code>call_ensures(b, args, output)</code>.</p>
+</span>
+        </div>
+        
+        <div class="left-announcement-item">
+          <span class="left-announcement-date">2024-01-15<br/>Travis Hance</span> <span class="left-announcement-text"><p>The '?' operator is now supported.</p>
+</span>
+        </div>
+        
+        <div class="left-announcement-item">
+          <span class="left-announcement-date">2023-11-07<br/>Chris Hawblitzel</span> <span class="left-announcement-text"><p>I'm about to merge <a href="https://github.com/verus-lang/verus/pull/771">https://github.com/verus-lang/verus/pull/771</a> .  With this, any items (e.g. functions, datatypes, etc.) declared outside the <code>verus!</code> macro will be considered external to the verifier by default.  This means that by default, Verus will not attempt to verify or process such items.  If you want such an item to be verified or visible to the verifier, you can either put it inside <code>verus!</code> or mark it <code>#[verifier::verify]</code>.  The reason for this new behavior is that some projects contain a lot of unverified code and a little verified code, and we don't want to have to mark every item in the unverified code as <code>#[verifier::external]</code>.  (For backwards compatibility, if you don't want this new default behavior, there is for now a flag <code>--no-external-by-default</code> that will opt out of this new behavior and restore the old behavior.)</p>
+</span>
+        </div>
+        
+        <div class="left-announcement-item">
+          <span class="left-announcement-date">2023-11-06<br/>Andrea Lattuada</span> <span class="left-announcement-text"><p>Hi folks! I am about to merge a pull request that replaces <code>--arch-word-bits</code> with a new directive <code>global size_of usize == 8;</code> (or <code>global size_of usize == 4;</code>) which sets the size of <code>usize</code> (and <code>isize</code>, as it's related) <em>and</em> adds a static assertion that, when compiled, <code>usize</code> has the expected size. If you're using <code>--arch-word-bits 64</code> you'll now need  <code>global size_of usize == 8;</code> inside the <code>verus!</code> macro, ideally at the root of your project. This change does not yet support <code>core::mem::size_of::&lt;usize&gt;()</code>, but an upcoming one will.</p>
+</span>
+        </div>
+        
+        <div class="left-announcement-item">
+          <span class="left-announcement-date">2023-10-17<br/>Andrea Lattuada</span> <span class="left-announcement-text"><p>Hi folks! FYI, I pushed a commit that re-organizes the command line options to reduce the number of top-level options, moving some of the less commonly used features to sub-flags, to make <code>--help</code> easier to scan. In particular, there's a new set of options (<code>-V</code>, modeled against rustc's <code>-Z</code>) for extended/experimental flags.</p>
+</span>
+        </div>
+        
+        <div class="left-announcement-item">
+          <span class="left-announcement-date">2023-09-21<br/>Andrea Lattuada</span> <span class="left-announcement-text"><p>Hi folks, I am about to merge two commits that require action from users:</p>
+<ul>
+<li>next time you pull, please rebuild <code>vargo</code> by following Step 3 of <a href="https://github.com/verus-lang/verus/blob/main/INSTALL.md">https://github.com/verus-lang/verus/blob/main/INSTALL.md</a>, and</li>
+<li><code>assert forall #![trigger Q(x)] |x| P(x)</code> is now consistent with regular <code>forall</code>, i.e. you will need to change those to <code>assert forall |x| #![trigger Q(x)]  P(x)</code> (the trigger annotation moves after the <code>|x|</code>). The same applies for <code>#![auto]</code>.</li>
+</ul>
+</span>
+        </div>
+        
+        <div class="left-announcement-item">
+          <span class="left-announcement-date">2023-09-21<br/>Andrea Lattuada</span> <span class="left-announcement-text"><p>At the moment, you may need to run <code>vargo clean -p vstd --release</code> before rebuilding Verus (if you’re getting an error message about the vstd fingerprint file). (Thank you <span class="user-mention" data-user-id="638116">@Jay Lorch</span> for the help debugging this issue.)</p>
+</span>
+        </div>
+        
+        <div class="left-announcement-item">
+          <span class="left-announcement-date">2023-09-05<br/>Andrea Lattuada</span> <span class="left-announcement-text"><p>I just merged another commit (<a href="https://github.com/verus-lang/verus/commit/0f957d69e8c002969b40a8e4aae97d140cd7d367">https://github.com/verus-lang/verus/commit/0f957d69e8c002969b40a8e4aae97d140cd7d367</a>) that requires re-building <code>vargo</code> when you pull new changes. You will need to rebuild vargo by following Step 3 of <a href="https://github.com/verus-lang/verus/blob/main/INSTALL.md">https://github.com/verus-lang/verus/blob/main/INSTALL.md</a> .</p>
+</span>
+        </div>
+        
+        <div class="left-announcement-item">
+          <span class="left-announcement-date">2023-09-01<br/>Andrea Lattuada</span> <span class="left-announcement-text"><p>A recent commit accidentally introduced an issue that resulted in imprecise spans being reported for error messages (the parts of the source underlined with <code>^^^^^^</code> or <code>------</code> in an error message) and caused a bad interaction between rust-analyzer (in vscode) and <code>vargo</code> that resulted in the build cache being invalidated more often than necessary, which caused <code>vargo</code> to often rebuild Verus and its dependencies from scratch. This has been fixed in a recent commit <a href="https://github.com/verus-lang/verus/commit/3a7b70f2123b144059073e97d27b05aef04f3bf4">https://github.com/verus-lang/verus/commit/3a7b70f2123b144059073e97d27b05aef04f3bf4</a>. If you have already built Verus and you pull the new changes, you will need to rebuild vargo by following Step 3 of <a href="https://github.com/verus-lang/verus/blob/main/INSTALL.md">https://github.com/verus-lang/verus/blob/main/INSTALL.md</a> .</p>
+</span>
+        </div>
+        
+        <div class="left-announcement-item">
+          <span class="left-announcement-date">2023-08-30<br/>Andrea Lattuada</span> <span class="left-announcement-text"><p>The pull request <a href="https://github.com/verus-lang/verus/pull/741">https://github.com/verus-lang/verus/pull/741</a> has just been merged. This changes the mechanism for <code>reveal</code> so that type arguments are not required anymore (see the PR for details). This is a breaking change, because, in an impl for type <code>A</code>, <code>Self::</code> is not supported anymore in the argument to reveal/reveal_with_fuel/hide; you can replace it with <code>A::</code> in an <code>impl A</code> block, and with <code>&lt;A as Tr&gt;::</code> in an <code>impl Tr for A</code> block.</p>
+</span>
+        </div>
+        
+        <div class="left-announcement-item">
+          <span class="left-announcement-date">2023-08-29<br/>Chris Hawblitzel</span> <span class="left-announcement-text"><p>The pull request <a href="https://github.com/verus-lang/verus/pull/733">https://github.com/verus-lang/verus/pull/733</a> has just been merged.  If you have already built Verus and you pull the new changes, you will need to rebuild <code>vargo</code> by following Step 3 of <a href="https://github.com/verus-lang/verus/blob/main/INSTALL.md">https://github.com/verus-lang/verus/blob/main/INSTALL.md</a> .</p>
+</span>
+        </div>
+        
+      </div>
+      
+    </div>
+    <div class="container">
+        <header> 
+            <!--<nav>
+                
+                
+                
+                <a  href="https:&#x2F;&#x2F;github.com&#x2F;verus-lang&#x2F;verus">Verus</a>
+                
+                
+            </nav>-->
+        </header>
+        <main id="main" tabindex="-1">
+            
+<article class="post">
+    <header>
+        <h1>404: Page not found</h1>
+    </header>
+    <div class="content">
+        Sorry, this page doesn't seem to exist.
+    </div>
+</article>
+
+        </main>
+        <footer>
+            <p class="powered-by-footer">
+                Powered by <a target="_blank" href="https://getzola.org/">Zola</a>, Theme <a target="_blank" href="https://github.com/zbrox/anpu-zola-theme">Anpu</a> (customized).
+            </p>
+            <p>
+                
+                
+            </p>
+        </footer>
+    </div>
+  </div>
+
+  <div class="dark-mode-buttons">
+  <button class="dark-mode-button" id="dark-mode-on">
+    <img
+      src="https://verus-lang.github.io/blog/dark_mode.svg"
+      width="24"
+      height="24"
+      alt="Dark mode"
+      aria-label="dark mode toggle"
+      title="Dark mode"
+    />
+  </button>
+  <button class="dark-mode-button" id="dark-mode-off">
+    <img
+      src="https://verus-lang.github.io/blog/light_mode.svg "
+      width="24"
+      height="24"
+      alt="Light mode"
+      aria-label="light mode toggle"
+      title="Light mode"
+      style="filter: invert(1);"
+    />
+  </button>
+</div>
+<script>
+  const cls = document.body.classList;
+  const getSessionTheme = sessionStorage.getItem("theme");
+  if (getSessionTheme === "dark") {
+    cls.toggle("dark-mode", true);
+  } else if (getSessionTheme === "light") {
+    cls.toggle("dark-mode", false);
+  } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+    cls.toggle("dark-mode", true);
+  }
+  document
+    .getElementById("dark-mode-on")
+    .addEventListener("click", function (e) {
+      cls.toggle("dark-mode", true);
+      sessionStorage.setItem("theme", "dark");
+    });
+  document
+    .getElementById("dark-mode-off")
+    .addEventListener("click", function (e) {
+      cls.toggle("dark-mode", false);
+      sessionStorage.setItem("theme", "light");
+    });
+</script>
+<noscript>
+  <style>
+    .dark-mode-buttons {
+      display: none;
+    }
+  </style>
+</noscript>
+
+    
+</body>
+</html>

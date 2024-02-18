@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>Verus blog</title>
+    <link rel="self" type="application/atom+xml" href="https://verus-lang.github.io/blog/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://verus-lang.github.io/blog"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2024-02-20T00:00:00+00:00</updated>
+    <id>https://verus-lang.github.io/blog/atom.xml</id>
+    <entry xml:lang="en">
+        <title>A gentle introduction to checking code correctness in Verus</title>
+        <published>2024-02-20T00:00:00+00:00</published>
+        <updated>2024-02-20T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://verus-lang.github.io/blog/verus-gentle-introduction/"/>
+        <id>https://verus-lang.github.io/blog/verus-gentle-introduction/</id>
+        
+        <summary type="html">&lt;style type=&quot;text&#x2F;css&quot;&gt;
+.note {
+    font-size: 80%;
+    line-height: 1em;
+}
+&lt;&#x2F;style&gt;
+&lt;p&gt;I&#x27;m going to talk about the tool we&#x27;ve been building, called Verus, which is a tool to verify Rust, and specifically to verify Rust code in the domain of system software: operating systems, file systems, things like that.&lt;&#x2F;p&gt;
+</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Announcement 2024-02-13</title>
+        <published>2024-02-13T00:00:00+00:00</published>
+        <updated>2024-02-13T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://verus-lang.github.io/blog/announcements/2024-02-13t14-17-49/"/>
+        <id>https://verus-lang.github.io/blog/announcements/2024-02-13t14-17-49/</id>
+        
+        <content type="html" xml:base="https://verus-lang.github.io/blog/announcements/2024-02-13t14-17-49/">&lt;p&gt;Hi folks, we recently renamed &lt;code&gt;FnSpec&lt;&#x2F;code&gt; to &lt;code&gt;spec_fn&lt;&#x2F;code&gt;. FnSpec was originally named following the convention of FnOnce, etc., but since it&#x27;s a type rather than a trait, we decided to make it look more like &lt;code&gt;fn&lt;&#x2F;code&gt; instead. Hence, &lt;code&gt;spec_fn&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;FnSpec should keep working for the time being, except for the deprecation warnings, but will be removed at some point.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Announcement 2024-02-13</title>
+        <published>2024-02-13T00:00:00+00:00</published>
+        <updated>2024-02-13T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://verus-lang.github.io/blog/announcements/2024-02-13t19-09-09/"/>
+        <id>https://verus-lang.github.io/blog/announcements/2024-02-13t19-09-09/</id>
+        
+        <content type="html" xml:base="https://verus-lang.github.io/blog/announcements/2024-02-13t19-09-09/">&lt;p&gt;Thanks to Alex Bai and others, Verus now has a standard library for arithmetic, based on Dafny&#x27;s. You can use it by importing from &lt;code&gt;vstd::arithmetic&lt;&#x2F;code&gt;, e.g., with&lt;&#x2F;p&gt;
+&lt;div class=&quot;codehilite&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;&#x2F;span&gt;&lt;code&gt;use vstd::arithmetic::div_mod::{lemma_fundamental_div_mod, lemma_mod_bound};
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;&#x2F;div&gt;
+&lt;p&gt;Documentation is at &lt;a href=&quot;https:&#x2F;&#x2F;verus-lang.github.io&#x2F;verus&#x2F;verusdoc&#x2F;vstd&#x2F;arithmetic&#x2F;index.html&quot;&gt;this link&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>A Verus overview</title>
+        <published>2024-02-13T00:00:00+00:00</published>
+        <updated>2024-02-13T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://verus-lang.github.io/blog/verus-overview/"/>
+        <id>https://verus-lang.github.io/blog/verus-overview/</id>
+        
+        <summary type="html">&lt;p&gt;Verus is a tool for verifying the correctness of code written in Rust.
+The main goal is to verify full functional correctness of low-level systems code,
+building on ideas from existing verification frameworks like
+&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;dafny-lang&#x2F;dafny&quot;&gt;Dafny&lt;&#x2F;a&gt;,
+&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;boogie-org&#x2F;boogie&quot;&gt;Boogie&lt;&#x2F;a&gt;,
+&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;FStarLang&#x2F;FStar&quot;&gt;F*&lt;&#x2F;a&gt;,
+&lt;a href=&quot;https:&#x2F;&#x2F;www.microsoft.com&#x2F;en-us&#x2F;research&#x2F;project&#x2F;vcc-a-verifier-for-concurrent-c&#x2F;&quot;&gt;VCC&lt;&#x2F;a&gt;,
+&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;viperproject&#x2F;prusti-dev&quot;&gt;Prusti&lt;&#x2F;a&gt;,
+&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;xldenis&#x2F;creusot&quot;&gt;Creusot&lt;&#x2F;a&gt;,
+&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;AeneasVerif&#x2F;aeneas&quot;&gt;Aeneas&lt;&#x2F;a&gt;,
+&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;NICTA&#x2F;cogent&quot;&gt;Cogent&lt;&#x2F;a&gt;,
+&lt;a href=&quot;https:&#x2F;&#x2F;coq.inria.fr&#x2F;&quot;&gt;Coq&lt;&#x2F;a&gt;,
+and
+&lt;a href=&quot;https:&#x2F;&#x2F;isabelle.in.tum.de&#x2F;overview.html&quot;&gt;Isabelle&#x2F;HOL&lt;&#x2F;a&gt;.
+Verification is static: Verus adds no run-time checks,
+but instead uses computer-aided theorem proving to statically verify
+that executable Rust code will always satisfy some user-provided specifications
+for all possible executions of the code.&lt;&#x2F;p&gt;
+</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Announcement 2024-02-12</title>
+        <published>2024-02-12T00:00:00+00:00</published>
+        <updated>2024-02-12T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://verus-lang.github.io/blog/announcements/2024-02-12t18-10-59/"/>
+        <id>https://verus-lang.github.io/blog/announcements/2024-02-12t18-10-59/</id>
+        
+        <content type="html" xml:base="https://verus-lang.github.io/blog/announcements/2024-02-12t18-10-59/">&lt;p&gt;Hi all! I have just merged &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;verus-lang&#x2F;verus&#x2F;pull&#x2F;978&quot;&gt;PR 978&lt;&#x2F;a&gt;. Next time you pull &lt;code&gt;main&lt;&#x2F;code&gt; you will need to obtain z3 4.12.5 (using &lt;code&gt;.&#x2F;tools&#x2F;get-z3.(sh|ps1)&lt;&#x2F;code&gt;. Vargo will check that the current version of z3 is the correct one, and let you know otherwise (you can override this check with &lt;code&gt;--no-solver-version-check&lt;&#x2F;code&gt; but note that current Verus will only successfully build with 4.12.5 (as we are using a new z3 option that was released in this version). As a reminder: updating z3 may cause existing proofs to break (due to changes in z3’s heuristics). Based on preliminary testing we expect limited breakage but be aware that when you pick up the merge commit you may need to tweak the proofs for certain functions. Let us know if you experience extensive breakage or if you encounter other issues.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Announcement 2024-02-09</title>
+        <published>2024-02-09T00:00:00+00:00</published>
+        <updated>2024-02-09T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://verus-lang.github.io/blog/announcements/2024-02-09t21-18-02/"/>
+        <id>https://verus-lang.github.io/blog/announcements/2024-02-09t21-18-02/</id>
+        
+        <content type="html" xml:base="https://verus-lang.github.io/blog/announcements/2024-02-09t21-18-02/">&lt;p&gt;Hi folks! A heads up that I am planning to merge &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;verus-lang&#x2F;verus&#x2F;pull&#x2F;978&quot;&gt;PR 978&lt;&#x2F;a&gt; on Monday morning UTC. This will upgrade z3 to the latest release (4.12.5); this may cause existing proofs to break (due to changes in z3’s heuristics). Based on preliminary testing we expect limited breakage but be aware that when you pick up the merge commit you may need to tweak the proofs for certain functions. I will post another announcement when I merge the change.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Announcement 2024-01-31</title>
+        <published>2024-01-31T00:00:00+00:00</published>
+        <updated>2024-01-31T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://verus-lang.github.io/blog/announcements/2024-01-31t15-51-07/"/>
+        <id>https://verus-lang.github.io/blog/announcements/2024-01-31t15-51-07/</id>
+        
+        <content type="html" xml:base="https://verus-lang.github.io/blog/announcements/2024-01-31t15-51-07/">&lt;p&gt;Hello, you can now pass named functions directly as values (exec functions only). For example:&lt;&#x2F;p&gt;
+&lt;div class=&quot;codehilite&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;&#x2F;span&gt;&lt;code&gt;fn a&amp;lt;F: Fn(u8) -&amp;gt; bool&amp;gt;(f: F) { ... }
+&lt;p&gt;fn b(value: u8) -&amp;gt; bool { ... }&lt;&#x2F;p&gt;
+&lt;p&gt;fn main() {
+&#x2F;&#x2F; This now works:
+a(b);&lt;&#x2F;p&gt;
+&lt;p&gt;&#x2F;&#x2F; Previously you would have had to create a closure:
+a(|x: u8| b(x));
+}
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;&lt;&#x2F;div&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;As with closures, you can use &lt;code&gt;b.requires(args)&lt;&#x2F;code&gt; and &lt;code&gt;b.ensures(args, output)&lt;&#x2F;code&gt; to access the precondition and postcondition. You can also use &lt;code&gt;call_requires(b, args)&lt;&#x2F;code&gt; or &lt;code&gt;call_ensures(b, args, output)&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Announcement 2024-01-15</title>
+        <published>2024-01-15T00:00:00+00:00</published>
+        <updated>2024-01-15T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://verus-lang.github.io/blog/announcements/2024-01-15t17-58-29/"/>
+        <id>https://verus-lang.github.io/blog/announcements/2024-01-15t17-58-29/</id>
+        
+        <content type="html" xml:base="https://verus-lang.github.io/blog/announcements/2024-01-15t17-58-29/">&lt;p&gt;The &#x27;?&#x27; operator is now supported.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Announcement 2023-11-07</title>
+        <published>2023-11-07T00:00:00+00:00</published>
+        <updated>2023-11-07T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://verus-lang.github.io/blog/announcements/2023-11-07t17-23-25/"/>
+        <id>https://verus-lang.github.io/blog/announcements/2023-11-07t17-23-25/</id>
+        
+        <content type="html" xml:base="https://verus-lang.github.io/blog/announcements/2023-11-07t17-23-25/">&lt;p&gt;I&#x27;m about to merge &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;verus-lang&#x2F;verus&#x2F;pull&#x2F;771&quot;&gt;https:&#x2F;&#x2F;github.com&#x2F;verus-lang&#x2F;verus&#x2F;pull&#x2F;771&lt;&#x2F;a&gt; .  With this, any items (e.g. functions, datatypes, etc.) declared outside the &lt;code&gt;verus!&lt;&#x2F;code&gt; macro will be considered external to the verifier by default.  This means that by default, Verus will not attempt to verify or process such items.  If you want such an item to be verified or visible to the verifier, you can either put it inside &lt;code&gt;verus!&lt;&#x2F;code&gt; or mark it &lt;code&gt;#[verifier::verify]&lt;&#x2F;code&gt;.  The reason for this new behavior is that some projects contain a lot of unverified code and a little verified code, and we don&#x27;t want to have to mark every item in the unverified code as &lt;code&gt;#[verifier::external]&lt;&#x2F;code&gt;.  (For backwards compatibility, if you don&#x27;t want this new default behavior, there is for now a flag &lt;code&gt;--no-external-by-default&lt;&#x2F;code&gt; that will opt out of this new behavior and restore the old behavior.)&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Announcement 2023-11-06</title>
+        <published>2023-11-06T00:00:00+00:00</published>
+        <updated>2023-11-06T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://verus-lang.github.io/blog/announcements/2023-11-06t16-19-04/"/>
+        <id>https://verus-lang.github.io/blog/announcements/2023-11-06t16-19-04/</id>
+        
+        <content type="html" xml:base="https://verus-lang.github.io/blog/announcements/2023-11-06t16-19-04/">&lt;p&gt;Hi folks! I am about to merge a pull request that replaces &lt;code&gt;--arch-word-bits&lt;&#x2F;code&gt; with a new directive &lt;code&gt;global size_of usize == 8;&lt;&#x2F;code&gt; (or &lt;code&gt;global size_of usize == 4;&lt;&#x2F;code&gt;) which sets the size of &lt;code&gt;usize&lt;&#x2F;code&gt; (and &lt;code&gt;isize&lt;&#x2F;code&gt;, as it&#x27;s related) &lt;em&gt;and&lt;&#x2F;em&gt; adds a static assertion that, when compiled, &lt;code&gt;usize&lt;&#x2F;code&gt; has the expected size. If you&#x27;re using &lt;code&gt;--arch-word-bits 64&lt;&#x2F;code&gt; you&#x27;ll now need  &lt;code&gt;global size_of usize == 8;&lt;&#x2F;code&gt; inside the &lt;code&gt;verus!&lt;&#x2F;code&gt; macro, ideally at the root of your project. This change does not yet support &lt;code&gt;core::mem::size_of::&amp;lt;usize&amp;gt;()&lt;&#x2F;code&gt;, but an upcoming one will.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Announcement 2023-10-17</title>
+        <published>2023-10-17T00:00:00+00:00</published>
+        <updated>2023-10-17T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://verus-lang.github.io/blog/announcements/2023-10-17t14-08-33/"/>
+        <id>https://verus-lang.github.io/blog/announcements/2023-10-17t14-08-33/</id>
+        
+        <content type="html" xml:base="https://verus-lang.github.io/blog/announcements/2023-10-17t14-08-33/">&lt;p&gt;Hi folks! FYI, I pushed a commit that re-organizes the command line options to reduce the number of top-level options, moving some of the less commonly used features to sub-flags, to make &lt;code&gt;--help&lt;&#x2F;code&gt; easier to scan. In particular, there&#x27;s a new set of options (&lt;code&gt;-V&lt;&#x2F;code&gt;, modeled against rustc&#x27;s &lt;code&gt;-Z&lt;&#x2F;code&gt;) for extended&#x2F;experimental flags.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Announcement 2023-09-21</title>
+        <published>2023-09-21T00:00:00+00:00</published>
+        <updated>2023-09-21T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://verus-lang.github.io/blog/announcements/2023-09-21t09-50-34/"/>
+        <id>https://verus-lang.github.io/blog/announcements/2023-09-21t09-50-34/</id>
+        
+        <content type="html" xml:base="https://verus-lang.github.io/blog/announcements/2023-09-21t09-50-34/">&lt;p&gt;Hi folks, I am about to merge two commits that require action from users:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;next time you pull, please rebuild &lt;code&gt;vargo&lt;&#x2F;code&gt; by following Step 3 of &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;verus-lang&#x2F;verus&#x2F;blob&#x2F;main&#x2F;INSTALL.md&quot;&gt;https:&#x2F;&#x2F;github.com&#x2F;verus-lang&#x2F;verus&#x2F;blob&#x2F;main&#x2F;INSTALL.md&lt;&#x2F;a&gt;, and&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;assert forall #![trigger Q(x)] |x| P(x)&lt;&#x2F;code&gt; is now consistent with regular &lt;code&gt;forall&lt;&#x2F;code&gt;, i.e. you will need to change those to &lt;code&gt;assert forall |x| #![trigger Q(x)]  P(x)&lt;&#x2F;code&gt; (the trigger annotation moves after the &lt;code&gt;|x|&lt;&#x2F;code&gt;). The same applies for &lt;code&gt;#![auto]&lt;&#x2F;code&gt;.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Announcement 2023-09-21</title>
+        <published>2023-09-21T00:00:00+00:00</published>
+        <updated>2023-09-21T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://verus-lang.github.io/blog/announcements/2023-09-21t20-19-14/"/>
+        <id>https://verus-lang.github.io/blog/announcements/2023-09-21t20-19-14/</id>
+        
+        <content type="html" xml:base="https://verus-lang.github.io/blog/announcements/2023-09-21t20-19-14/">&lt;p&gt;At the moment, you may need to run &lt;code&gt;vargo clean -p vstd --release&lt;&#x2F;code&gt; before rebuilding Verus (if you’re getting an error message about the vstd fingerprint file). (Thank you &lt;span class=&quot;user-mention&quot; data-user-id=&quot;638116&quot;&gt;@Jay Lorch&lt;&#x2F;span&gt; for the help debugging this issue.)&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Announcement 2023-09-05</title>
+        <published>2023-09-05T00:00:00+00:00</published>
+        <updated>2023-09-05T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://verus-lang.github.io/blog/announcements/2023-09-05t01-13-23/"/>
+        <id>https://verus-lang.github.io/blog/announcements/2023-09-05t01-13-23/</id>
+        
+        <content type="html" xml:base="https://verus-lang.github.io/blog/announcements/2023-09-05t01-13-23/">&lt;p&gt;I just merged another commit (&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;verus-lang&#x2F;verus&#x2F;commit&#x2F;0f957d69e8c002969b40a8e4aae97d140cd7d367&quot;&gt;https:&#x2F;&#x2F;github.com&#x2F;verus-lang&#x2F;verus&#x2F;commit&#x2F;0f957d69e8c002969b40a8e4aae97d140cd7d367&lt;&#x2F;a&gt;) that requires re-building &lt;code&gt;vargo&lt;&#x2F;code&gt; when you pull new changes. You will need to rebuild vargo by following Step 3 of &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;verus-lang&#x2F;verus&#x2F;blob&#x2F;main&#x2F;INSTALL.md&quot;&gt;https:&#x2F;&#x2F;github.com&#x2F;verus-lang&#x2F;verus&#x2F;blob&#x2F;main&#x2F;INSTALL.md&lt;&#x2F;a&gt; .&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Announcement 2023-09-01</title>
+        <published>2023-09-01T00:00:00+00:00</published>
+        <updated>2023-09-01T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://verus-lang.github.io/blog/announcements/2023-09-01t01-35-03/"/>
+        <id>https://verus-lang.github.io/blog/announcements/2023-09-01t01-35-03/</id>
+        
+        <content type="html" xml:base="https://verus-lang.github.io/blog/announcements/2023-09-01t01-35-03/">&lt;p&gt;A recent commit accidentally introduced an issue that resulted in imprecise spans being reported for error messages (the parts of the source underlined with &lt;code&gt;^^^^^^&lt;&#x2F;code&gt; or &lt;code&gt;------&lt;&#x2F;code&gt; in an error message) and caused a bad interaction between rust-analyzer (in vscode) and &lt;code&gt;vargo&lt;&#x2F;code&gt; that resulted in the build cache being invalidated more often than necessary, which caused &lt;code&gt;vargo&lt;&#x2F;code&gt; to often rebuild Verus and its dependencies from scratch. This has been fixed in a recent commit &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;verus-lang&#x2F;verus&#x2F;commit&#x2F;3a7b70f2123b144059073e97d27b05aef04f3bf4&quot;&gt;https:&#x2F;&#x2F;github.com&#x2F;verus-lang&#x2F;verus&#x2F;commit&#x2F;3a7b70f2123b144059073e97d27b05aef04f3bf4&lt;&#x2F;a&gt;. If you have already built Verus and you pull the new changes, you will need to rebuild vargo by following Step 3 of &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;verus-lang&#x2F;verus&#x2F;blob&#x2F;main&#x2F;INSTALL.md&quot;&gt;https:&#x2F;&#x2F;github.com&#x2F;verus-lang&#x2F;verus&#x2F;blob&#x2F;main&#x2F;INSTALL.md&lt;&#x2F;a&gt; .&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Announcement 2023-08-30</title>
+        <published>2023-08-30T00:00:00+00:00</published>
+        <updated>2023-08-30T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://verus-lang.github.io/blog/announcements/2023-08-30t16-25-45/"/>
+        <id>https://verus-lang.github.io/blog/announcements/2023-08-30t16-25-45/</id>
+        
+        <content type="html" xml:base="https://verus-lang.github.io/blog/announcements/2023-08-30t16-25-45/">&lt;p&gt;The pull request &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;verus-lang&#x2F;verus&#x2F;pull&#x2F;741&quot;&gt;https:&#x2F;&#x2F;github.com&#x2F;verus-lang&#x2F;verus&#x2F;pull&#x2F;741&lt;&#x2F;a&gt; has just been merged. This changes the mechanism for &lt;code&gt;reveal&lt;&#x2F;code&gt; so that type arguments are not required anymore (see the PR for details). This is a breaking change, because, in an impl for type &lt;code&gt;A&lt;&#x2F;code&gt;, &lt;code&gt;Self::&lt;&#x2F;code&gt; is not supported anymore in the argument to reveal&#x2F;reveal_with_fuel&#x2F;hide; you can replace it with &lt;code&gt;A::&lt;&#x2F;code&gt; in an &lt;code&gt;impl A&lt;&#x2F;code&gt; block, and with &lt;code&gt;&amp;lt;A as Tr&amp;gt;::&lt;&#x2F;code&gt; in an &lt;code&gt;impl Tr for A&lt;&#x2F;code&gt; block.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Announcement 2023-08-29</title>
+        <published>2023-08-29T00:00:00+00:00</published>
+        <updated>2023-08-29T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://verus-lang.github.io/blog/announcements/2023-08-29t20-58-21/"/>
+        <id>https://verus-lang.github.io/blog/announcements/2023-08-29t20-58-21/</id>
+        
+        <content type="html" xml:base="https://verus-lang.github.io/blog/announcements/2023-08-29t20-58-21/">&lt;p&gt;The pull request &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;verus-lang&#x2F;verus&#x2F;pull&#x2F;733&quot;&gt;https:&#x2F;&#x2F;github.com&#x2F;verus-lang&#x2F;verus&#x2F;pull&#x2F;733&lt;&#x2F;a&gt; has just been merged.  If you have already built Verus and you pull the new changes, you will need to rebuild &lt;code&gt;vargo&lt;&#x2F;code&gt; by following Step 3 of &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;verus-lang&#x2F;verus&#x2F;blob&#x2F;main&#x2F;INSTALL.md&quot;&gt;https:&#x2F;&#x2F;github.com&#x2F;verus-lang&#x2F;verus&#x2F;blob&#x2F;main&#x2F;INSTALL.md&lt;&#x2F;a&gt; .&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>
