@@ -2,6 +2,7 @@
 title = "A gentle introduction to checking code correctness in Verus"
 slug = "verus-gentle-introduction"
 author = "Andrea Lattuada"
+date = 2024-02-20
 
 [taxonomies]
 authors = ["Andrea Lattuada"]
