@@ -35,6 +35,7 @@
       <p style="text-align: justify;">Verus is a tool for verifying the correctness of code written in Rust. Developers write specifications of what their code should do, and Verus statically checks that the executable Rust code will always satisfy the specifications for all possible executions of the code.</p>
       <p style="font-weight: bold; font-size: 100%">Verus is open-source at <a href="https://github.com/verus-lang/verus">github.com/verus-lang/verus</a></p>
       </div>
+      {% block announcements %}
       <div class="left-announcements">
         <h2>Verus Announcements</h2>
         <!-- TODO turn this into an UL list -->
@@ -45,6 +46,7 @@
         </div>
         {% endfor %}
       </div>
+      {% endblock announcements %}
     </div>
     <div class="container">
         <header> 
